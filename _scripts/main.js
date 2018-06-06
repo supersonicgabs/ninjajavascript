@@ -147,3 +147,38 @@ console.log(values);
 var values = [ 213, 16, 2058, 54, 10, 1965, 57, 9 ];
 values.sort(function(value1, value2){ return value2 - value1; });
 
+function isNimble(){ return true; }
+
+assert(typeof window.isNimble === "function",
+    "isNimble() defined");
+
+assert(isNimble.name === "isNimble",
+    "isNimble() has a name"); 
+
+var canFly = function(){return true;};
+
+assert(typeof window.vanFly === "function",
+"canFly() defined");
+
+assert(canFly.name === "",
+"canFly() has no name");
+
+window.isDeadly = function(){return true;};
+
+assert(typeof window.isDeadly === "function",
+"isDeadly() defined");
+
+function outer(){
+    assert(typeof inner === "function", "inner() in scope before declaration");
+    function inner(){}
+    assert(typeof inner === "function", "inner() in scope after declaration");
+    assert(window.inner === undefined, "inner() not in global scope");
+}
+
+outer();
+assert(window.inner === undefined, "inner() still not in global scope");
+window.wieldsSword = function swingsSword(){ return true; };
+
+assert(window.wieldsSword.name === 'swingSword', "wieldSword's real anme is swingsSword");
+
+
